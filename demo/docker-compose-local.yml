@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   n8n-python:
-    image: naskio/n8n-python:latest-debian # use this if intended to use heavy python packages
+    image: jnukylin/n8n-python:latest-debian # use this if intended to use heavy python packages
     #    image: naskio/n8n-python # alpine for light python packages
     #    command: /bin/sh -c "n8n start"
     restart: always
