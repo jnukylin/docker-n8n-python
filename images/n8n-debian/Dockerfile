@@ -1,4 +1,4 @@
-FROM nikolaik/python-nodejs:python3.10-nodejs18
+FROM nikolaik/python-nodejs:python3.11-nodejs23
 
 # changing user `pn` to `node`
 RUN usermod --login node --move-home --home /home/node pn
