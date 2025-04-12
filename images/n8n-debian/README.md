@@ -10,7 +10,7 @@ For information about how to run n8n with Docker check the generic
 docker build --build-arg N8N_VERSION=<VERSION> -t n8nio/n8n:<VERSION> .
 
 # For example:
-docker build --build-arg N8N_VERSION=0.43.0 -t n8nio/n8n:0.43.0-debian .
+docker build --build-arg N8N_VERSION=1.88.0 -t n8nio/n8n:1.88.0-debian .
 ```
 
 ```
