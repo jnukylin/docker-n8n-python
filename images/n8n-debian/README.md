@@ -17,5 +17,5 @@ docker build --build-arg N8N_VERSION=1.88.0 -t n8nio/n8n:1.88.0-debian .
 docker run -it --rm \
   --name n8n \
   -p 5678:5678 \
-  n8nio/n8n:0.43.0-debian
+  n8nio/n8n:1.88.0-debian
 ```
