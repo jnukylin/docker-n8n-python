@@ -1,4 +1,4 @@
-#更新为python3.11 
+#更新为python3.11 ,18.7<nodejs<=22
 FROM nikolaik/python-nodejs:python3.11-nodejs22-alpine
 
 # changing user `pn` to `node`
