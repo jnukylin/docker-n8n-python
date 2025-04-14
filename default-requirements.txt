@@ -6,10 +6,8 @@ numpy
 scikit-learn
 Faker
 numpy
-# doesn't support Python 3.10 yet
-instaloader
-instapy
 pymongo
 mongoengine
 beautifulsoup4==4.12.2
 xmltodict
+markitdown
