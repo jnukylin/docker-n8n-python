@@ -1,3 +1,4 @@
+#更新为python3.11 
 FROM nikolaik/python-nodejs:python3.11-nodejs23-alpine
 
 # changing user `pn` to `node`
