@@ -3,11 +3,6 @@ requests
 HTTPAdapter
 pandas
 numpy
-scikit-learn
-Faker
 numpy
-pymongo
-mongoengine
 beautifulsoup4==4.12.2
-xmltodict
 markitdown
