@@ -1,3 +1,4 @@
 fire
 markitdown
 openpyxl
+requests
