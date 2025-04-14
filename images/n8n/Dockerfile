@@ -1,5 +1,5 @@
 #更新为python3.11 
-FROM nikolaik/python-nodejs:python3.11-nodejs23-alpine
+FROM nikolaik/python-nodejs:python3.11-nodejs22-alpine
 
 # changing user `pn` to `node`
 RUN deluser pn && rm -r /home/pn # delete: user + group
