@@ -49,7 +49,7 @@ RUN apk --no-cache add --virtual fonts msttcorefonts-installer fontconfig && \
 # RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
 # RUN apk --no-cache --update-cache add gfortran build-base wget freetype-dev libpng-dev openblas-dev
 # RUN apk --no-cache --update-cache add wget libgfortran musl-dev linux-headers
-
+RUN pip install --no-cache-dir -r markitdown
 # Install python requirements
 RUN mkdir /requirements
 COPY requirements.txt /requirements/requirements.txt
