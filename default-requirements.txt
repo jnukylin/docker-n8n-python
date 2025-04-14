@@ -1,6 +1,5 @@
 fire
 requests
-BeautifulSoup
 HTTPAdapter
 pandas
 numpy
