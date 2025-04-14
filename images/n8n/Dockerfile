@@ -19,6 +19,7 @@ RUN apk add --no-cache \
     musl-dev \
     linux-headers \
     build-base
+    
 # # Set a custom user to not have n8n run as root
 USER root
 
