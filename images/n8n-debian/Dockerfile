@@ -1,3 +1,4 @@
+#python更新至3.11，nodejs版本不能大于22
 FROM nikolaik/python-nodejs:python3.11-nodejs22
 
 # changing user `pn` to `node`
