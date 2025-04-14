@@ -20,6 +20,7 @@ RUN apt-get update && apt-get install -y \
     musl-dev \
     linux-headers \
     build-essential
+    
 # Install python requirements
 RUN mkdir /requirements
 COPY requirements.txt /requirements/requirements.txt
