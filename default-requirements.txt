@@ -1,1 +1,7 @@
 fire
+requests
+BeautifulSoup
+HTTPAdapter
+pandas
+numpy
+scikit-learn
