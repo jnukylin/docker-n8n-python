@@ -11,5 +11,5 @@ instaloader
 instapy
 pymongo
 mongoengine
-beautifulsoup4
+beautifulsoup4==4.12.2
 xmltodict
