@@ -17,7 +17,6 @@ RUN apt-get update && apt-get install -y \
     python3-dev \
     gcc \
     g++ \
-    musl-dev \
     linux-headers \
     build-essential
     
