@@ -11,7 +11,14 @@ RUN if [ -z "$N8N_VERSION" ] ; then echo "The N8N_VERSION argument is missing!" 
 
 # Update everything and install needed dependencies
 RUN apk add --update graphicsmagick tzdata git tini su-exec
-
+RUN apk add --no-cache \
+    python3-dev \
+    py3-pip \
+    gcc \
+    g++ \
+    musl-dev \
+    linux-headers \
+    build-base
 # # Set a custom user to not have n8n run as root
 USER root
 
