@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -y \
     python3-dev \
     gcc \
     g++ \
-    linux-headers-$(uname -r) \
+    #linux-headers-$(uname -r) \
     build-essential && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
     
