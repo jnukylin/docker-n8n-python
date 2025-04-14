@@ -1,8 +1,2 @@
 fire
-requests
-HTTPAdapter
-pandas
-numpy
-numpy
-beautifulsoup4==4.12.2
 markitdown
