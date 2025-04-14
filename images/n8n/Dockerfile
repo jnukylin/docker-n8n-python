@@ -11,6 +11,7 @@ RUN if [ -z "$N8N_VERSION" ] ; then echo "The N8N_VERSION argument is missing!" 
 
 # Update everything and install needed dependencies
 RUN apk add --update graphicsmagick tzdata git tini su-exec
+
 RUN apk add --no-cache \
     python3-dev \
     py3-pip \
