@@ -52,9 +52,21 @@ ENV NODE_ICU_DATA /usr/lib/node_modules/full-icu
 
 WORKDIR /data
 
-COPY docker-entrypoint.sh /docker-entrypoint.sh
-# 修改 entrypoint 脚本以设置 PYTHONPATH
-RUN sed -i '1s/^/export PYTHONPATH=\/usr\/local\/lib\/python3.11\/dist-packages:\/home\/pyodide\/lib\/python3.11\/site-packages:$PYTHONPATH\n/' /docker-entrypoint.sh
+# 直接在 Dockerfile 中创建 entrypoint 脚本，避免格式问题
+RUN echo '#!/bin/bash\n\
+set -e\n\
+\n\
+# 设置 PYTHONPATH 环境变量\n\
+export PYTHONPATH=/usr/local/lib/python3.11/dist-packages:/home/pyodide/lib/python3.11/site-packages:$PYTHONPATH\n\
+\n\
+# 如果命令以 n8n 开头，则使用 node 用户运行\n\
+if [ "${1:0:4}" = "n8n " ]; then\n\
+  exec gosu node "$@"\n\
+else\n\
+  exec "$@"\n\
+fi' > /docker-entrypoint.sh && \
+    chmod +x /docker-entrypoint.sh
+
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
 EXPOSE 5678/tcp
