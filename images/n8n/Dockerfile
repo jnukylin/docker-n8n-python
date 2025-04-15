@@ -1,4 +1,4 @@
-#更新为python3.11 ,18.7<nodejs<=22
+#更新为python3.11 
 FROM nikolaik/python-nodejs:python3.11-nodejs22-alpine
 
 # changing user `pn` to `node`
@@ -9,34 +9,52 @@ ARG N8N_VERSION
 
 RUN if [ -z "$N8N_VERSION" ] ; then echo "The N8N_VERSION argument is missing!" ; exit 1; fi
 
-# 使用 apt-get 替代 apk
-RUN apt-get update && apt-get install -y graphicsmagick tzdata git tini su-exec
+# Update everything and install needed dependencies
+RUN apk add --update graphicsmagick tzdata git tini su-exec
 
+RUN apk add --no-cache \
+    python3-dev \
+    py3-pip \
+    gcc \
+    g++ \
+    musl-dev \
+    linux-headers \
+    build-base
+    
 # # Set a custom user to not have n8n run as root
 USER root
 
-# 使用 apt-get 安装构建依赖
-RUN apt-get update && apt-get install -y build-essential ca-certificates && \
+# Install n8n and the also temporary all the packages
+# it needs to build it correctly.
+RUN apk --update add --virtual build-dependencies build-base ca-certificates && \
 	npm_config_user=root npm install -g full-icu n8n@${N8N_VERSION} && \
-	apt-get purge -y build-essential && apt-get autoremove -y && \
-	rm -rf /root /tmp/* /var/cache/apk/* && mkdir /root
+	apk del build-dependencies \
+	&& rm -rf /root /tmp/* /var/cache/apk/* && mkdir /root;
 
 # Install n8n-nodes-python module
 RUN cd /usr/local/lib/node_modules/n8n && npm install n8n-nodes-python
-RUN cd /usr/local/lib/node_modules/n8n && npm install n8n-nodes-changed
-RUN cd /usr/local/lib/node_modules/n8n && npm install n8n-nodes-updates
-RUN cd /usr/local/lib/node_modules/n8n && npm install n8n-nodes-influxdb
 
-# 使用 apt-get 安装字体
-RUN apt-get update && apt-get install -y fonts-liberation fontconfig && \
+# Install fonts
+RUN apk --no-cache add --virtual fonts msttcorefonts-installer fontconfig && \
+	update-ms-fonts && \
 	fc-cache -f && \
-	apt-get purge -y fonts-liberation && apt-get autoremove -y && \
-	rm -rf /root /tmp/* /var/lib/apt/lists/* && mkdir /root
+	apk del fonts && \
+	find  /usr/share/fonts/truetype/msttcorefonts/ -type l -exec unlink {} \; \
+	&& rm -rf /root /tmp/* /var/cache/apk/* && mkdir /root
 
+# (note: use debian instead of alpine if you want to use Pandas or heavy libraries)
+# Install Python Development Tools (disabled)
+# RUN apk update && apk --no-cache add make automake gcc g++ subversion python3-dev
+# RUN apk update && apk --no-cache add musl-dev linux-headers g++
+# RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
+# RUN apk --no-cache --update-cache add gfortran build-base wget freetype-dev libpng-dev openblas-dev
+# RUN apk --no-cache --update-cache add wget libgfortran musl-dev linux-headers
+RUN pip install --no-cache-dir markitdown
 # Install python requirements
 RUN mkdir /requirements
 COPY requirements.txt /requirements/requirements.txt
 RUN python -m pip install --upgrade pip setuptools wheel
+#RUN pip install -r /requirements/requirements.txt
 RUN pip install --no-cache-dir -r /requirements/requirements.txt
 ENV NODE_ICU_DATA /usr/local/lib/node_modules/full-icu
 
