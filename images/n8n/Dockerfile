@@ -60,7 +60,21 @@ ENV PYTHONPATH=/usr/local/lib/python3.11/site-packages:/home/pyodide/lib/python3
 
 WORKDIR /data
 
-COPY docker-entrypoint.sh /docker-entrypoint.sh
+# 直接在 Dockerfile 中创建 entrypoint 脚本
+RUN echo '#!/bin/sh\n\
+set -e\n\
+\n\
+# 设置 PYTHONPATH 环境变量\n\
+export PYTHONPATH=/usr/local/lib/python3.11/site-packages:/home/pyodide/lib/python3.11/site-packages:$PYTHONPATH\n\
+\n\
+# 如果命令以 n8n 开头，则使用 node 用户运行\n\
+if [ "${1:0:4}" = "n8n " ]; then\n\
+  exec su-exec node "$@"\n\
+else\n\
+  exec "$@"\n\
+fi' > /docker-entrypoint.sh && \
+    chmod +x /docker-entrypoint.sh
+
 ENTRYPOINT ["tini", "--", "/docker-entrypoint.sh"]
 
 EXPOSE 5678/tcp
