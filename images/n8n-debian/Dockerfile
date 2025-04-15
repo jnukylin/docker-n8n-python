@@ -38,6 +38,8 @@ RUN cd /usr/local/lib/node_modules/n8n && npm install n8n-nodes-python
 RUN cd /usr/local/lib/node_modules/n8n && npm install n8n-nodes-changed
 RUN cd /usr/local/lib/node_modules/n8n && npm install n8n-nodes-updates
 RUN cd /usr/local/lib/node_modules/n8n && npm install n8n-nodes-influxdb
+RUN cd /usr/local/lib/node_modules/n8n && npm install n8n-nodes-tavily
+
 
 ENV NODE_ICU_DATA /usr/lib/node_modules/full-icu
 
