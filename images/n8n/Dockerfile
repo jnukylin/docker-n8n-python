@@ -23,6 +23,9 @@ RUN apt-get update && apt-get install -y build-essential ca-certificates && \
 
 # Install n8n-nodes-python module
 RUN cd /usr/local/lib/node_modules/n8n && npm install n8n-nodes-python
+RUN cd /usr/local/lib/node_modules/n8n && npm install n8n-nodes-changed
+RUN cd /usr/local/lib/node_modules/n8n && npm install n8n-nodes-updates
+RUN cd /usr/local/lib/node_modules/n8n && npm install n8n-nodes-influxdb
 
 # 使用 apt-get 安装字体
 RUN apt-get update && apt-get install -y fonts-liberation fontconfig && \
