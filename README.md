@@ -1,12 +1,16 @@
-# n8n - docker image with Python 3.10 and custom node PythonFunction
+Thanks to naskio! I refactored his naskio/n8n-python, upgrading it to Python 3.11.
+
+Choose the option that best fits the context where you plan to use it.
+
+# n8n - docker image with Python 3.11 and custom node PythonFunction
 
 ![n8n.io - Workflow Automation](https://raw.githubusercontent.com/n8n-io/n8n/master/assets/n8n-logo.png)
 
-This [image](https://hub.docker.com/r/naskio/n8n-python) includes Python 3.10 by default. it can be used to run python
+This [image](https://hub.docker.com/r/jnukylin/n8n-python) includes Python 3.11 by default. it can be used to run python
 scripts inside n8n using the [Execute Command](https://docs.n8n.io/nodes/n8n-nodes-base.executeCommand/) node or code
 snippets using the custom node [Python Function](https://www.github.com/naskio/n8n-nodes-python).
 
-> Run python 3.10 code on n8n.
+> Run python 3.11 code on n8n.
 
 [Docker Hub](https://hub.docker.com/r/naskio/n8n-python)
 
