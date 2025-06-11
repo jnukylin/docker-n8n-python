@@ -1,1 +1,7 @@
-
+fire
+markitdown
+openpyxl
+requests
+akshare
+BeautifulSoup
+requests
