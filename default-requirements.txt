@@ -2,3 +2,6 @@ fire
 markitdown
 openpyxl
 requests
+pandas
+time
+akshare
