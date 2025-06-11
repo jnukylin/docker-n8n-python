@@ -22,7 +22,8 @@ jobs:
         uses: actions/checkout@v4
       - name: Get the version
         id: vars
-        run: echo ::set-output name=tag::$(cat release-versions/n8n-latest.txt)
+        #run: echo ::set-output name=tag::$(cat release-versions/n8n-latest.txt)
+        run: echo "tag=$(cat release-versions/n8n-latest.txt)" >> $GITHUB_OUTPUT
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
