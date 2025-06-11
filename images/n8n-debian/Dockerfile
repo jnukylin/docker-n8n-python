@@ -1,5 +1,6 @@
 #python更新至3.11，nodejs版本不能大于22
-FROM nikolaik/python-nodejs:python3.11-nodejs22
+#FROM nikolaik/python-nodejs:python3.11-nodejs22
+FROM nikolaik/python-nodejs:python3.11-nodejs20
 
 # changing user `pn` to `node`
 RUN usermod --login node --move-home --home /home/node pn
