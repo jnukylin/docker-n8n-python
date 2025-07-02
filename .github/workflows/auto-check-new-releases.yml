@@ -21,8 +21,39 @@ jobs:
       - name: Fetch release version
         id: fetch-version
         run: |
-          curl -sL https://api.github.com/repos/n8n-io/n8n/releases/latest | jq -r '.tag_name' > release-versions/n8n-latest.txt
-          echo ::set-output name=version::$(cat release-versions/n8n-latest.txt)
+          # 使用 GitHub API 获取 n8n 仓库的最新 release，并用 jq 解析出 tag_name
+          # 将版本号保存到一个变量中
+          LATEST_VERSION=$(curl -sL https://api.github.com/repos/n8n-io/n8n/releases/latest | jq -r '.tag_name')
+          
+          # 确保目录存在
+          mkdir -p release-versions
+
+          # 将获取到的最新版本号写入到文件中，这会覆盖旧文件内容
+          echo "${LATEST_VERSION}" > release-versions/n8n-latest.txt
+          
+          # 打印版本号到日志，方便调试
+          echo "Latest n8n version is: ${LATEST_VERSION}"
+          
+          # 使用 GITHUB_OUTPUT 将版本号设置为此步骤的输出变量，变量名为 "version"
+          echo "version=${LATEST_VERSION}" >> $GITHUB_OUTPUT
+
+      # 第三步：如果文件有变更，则自动创建并推送提交
+      - name: Commit and push if changed
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          # 自定义提交信息，引用上一步的输出变量 "version"
+          commit_message: "chore(release): Update n8n to version ${{ steps.fetch-version.outputs.version }}"
+          
+          # 指定要监控的文件模式，只有这个文件发生变化时才会提交
+          file_pattern: release-versions/n8n-latest.txt
+          
+          # 配置提交者信息
+          commit_user_name: "GitHub Actions Bot"
+          commit_user_email: "github-actions[bot]@users.noreply.github.com"
+
+        #run: |
+          #curl -sL https://api.github.com/repos/n8n-io/n8n/releases/latest | jq -r '.tag_name' > release-versions/n8n-latest.txt
+          #echo ::set-output name=version::$(cat release-versions/n8n-latest.txt)
      
        
        #run: |
