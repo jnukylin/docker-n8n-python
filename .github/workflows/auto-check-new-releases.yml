@@ -9,7 +9,8 @@ name: Check for new releases
 # Automatically check for new releases (new versions)
 on:
   schedule:
-    - cron: "0 0 */1 * *"
+    #- cron: "0 0 */1 * *"
+    - cron: "0 15 * * *"
 
 jobs:
   get-version:
