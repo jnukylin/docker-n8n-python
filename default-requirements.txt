@@ -6,4 +6,5 @@ pandas
 akshare
 BeautifulSoup4
 requests
+pandas-ta
 
