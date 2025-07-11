@@ -19,10 +19,20 @@ RUN apt-get update && apt-get install -y \
     gcc \
     g++ \
     tini \
-    libta-lib-dev \
     #linux-headers-$(uname -r) \
     build-essential && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# 2. 下载、编译并安装 TA-Lib 的 C 库
+RUN wget http://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-src.tar.gz -O ta-lib-0.4.0-src.tar.gz && \
+    tar -xzf ta-lib-0.4.0-src.tar.gz && \
+    cd ta-lib/ && \
+    ./configure --prefix=/usr && \
+    make && \
+    make install && \
+# 3. 清理工作，删除源码和压缩包以减小镜像体积
+    cd .. && \
+    rm -rf ta-lib ta-lib-0.4.0-src.tar.gz
     
 # Install python requirements
 RUN mkdir /requirements
