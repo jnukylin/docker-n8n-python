@@ -25,7 +25,7 @@ RUN apt-get update && apt-get install -y \
     build-essential && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN ta_lib-0.6.3-cp311-cp311-win_amd64.whl
+RUN pip install ta_lib-0.6.3-cp311-cp311-win_amd64.whl
     
 # Install python requirements
 RUN mkdir /requirements
