@@ -6,3 +6,4 @@ pandas
 akshare
 BeautifulSoup4
 requests
+talib
