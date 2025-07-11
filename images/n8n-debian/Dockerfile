@@ -19,6 +19,7 @@ RUN apt-get update && apt-get install -y \
     gcc \
     g++ \
     tini \
+    libta-lib-dev \
     #linux-headers-$(uname -r) \
     build-essential && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
