@@ -25,7 +25,8 @@ RUN apt-get update && apt-get install -y \
     build-essential && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN pip install TA-Lib
+# 下载Linux版本的TA-Lib wheel文件
+RUN pip install https://github.com/TA-Lib/ta-lib-python/releases/download/TA_Lib-0.4.28/TA_Lib-0.4.28-cp311-cp311-linux_x86_64.whl
     
 # Install python requirements
 RUN mkdir /requirements
