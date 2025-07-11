@@ -25,27 +25,13 @@ RUN apt-get update && apt-get install -y \
     build-essential && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# 2. 下载、编译并安装 TA-Lib 的 C 库
-RUN mkdir -p /tmp/ta-lib && \
-    cd /tmp/ta-lib && \
-    wget http://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-src.tar.gz && \
-    tar -xzf ta-lib-0.4.0-src.tar.gz && \
-    cd ta-lib/ && \
-    ./configure --prefix=/usr/local && \
-    make && \
-    make install && \
-    cd / && \
-    rm -rf /tmp/ta-lib
-
-# 更新库路径
-RUN ldconfig
+RUN ta_lib-0.6.3-cp311-cp311-win_amd64.whl
     
 # Install python requirements
 RUN mkdir /requirements
 COPY requirements.txt /requirements/requirements.txt
 RUN python -m pip install --upgrade pip setuptools wheel
 RUN pip install -r /requirements/requirements.txt
-
 # Set a custom user to not have n8n run as root
 USER root
 
