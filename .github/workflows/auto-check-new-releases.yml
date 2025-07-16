@@ -1,9 +1,9 @@
 name: Check for new n8n releases
 
 on:
-  # 每日 UTC 15:00 (台北/北京時間 23:00) 執行一次
+  # 每小時的第 15 分鐘執行一次
   schedule:
-    - cron: "19 * * * *"
+    - cron: "15 * * * *"
   # 也允許手動觸發，方便測試
   workflow_dispatch:
 
@@ -27,13 +27,16 @@ jobs:
         id: fetch-version
         run: |
           # 關鍵點 2: 在 API 請求中加入 PAT 進行驗證，以避免觸發 API 頻率限制
-          LATEST_VERSION=$(curl -sL -H "Authorization: Bearer ${{ secrets.PAT }}" https://api.github.com/repos/n8n-io/n8n/releases/latest | jq -r '.tag_name')
+          RAW_VERSION=$(curl -sL -H "Authorization: Bearer ${{ secrets.PAT }}" https://api.github.com/repos/n8n-io/n8n/releases/latest | jq -r '.tag_name')
           
           # 如果獲取失敗，則退出
-          if [ -z "$LATEST_VERSION" ]; then
+          if [ -z "$RAW_VERSION" ]; then
             echo "Failed to fetch latest version. Exiting."
             exit 1
           fi
+
+          # 新增：移除 'n8n@' 前綴以獲取純淨的版本號
+          LATEST_VERSION=${RAW_VERSION#n8n@}
 
           mkdir -p release-versions
           echo "${LATEST_VERSION}" > release-versions/n8n-latest.txt
