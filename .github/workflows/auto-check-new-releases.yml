@@ -21,6 +21,10 @@ jobs:
       # 由於上面已設定 permissions，這裡不再需要 PAT
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          # 使用 PAT 來 checkout，這樣後續的 push 就會使用 PAT 進行驗證
+          # 這是觸發其他 workflow 的關鍵
+          token: ${{ secrets.PAT }}
 
       # 步驟二：獲取最新的 n8n 版本號
       - name: Fetch latest n8n release version
