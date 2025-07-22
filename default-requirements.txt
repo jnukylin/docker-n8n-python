@@ -7,4 +7,4 @@ akshare
 BeautifulSoup4
 requests
 pandas-ta
-
+crawl4ai
