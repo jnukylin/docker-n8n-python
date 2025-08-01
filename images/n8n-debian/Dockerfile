@@ -21,6 +21,17 @@ RUN apt-get update && apt-get install -y \
     tini \
     wget \
     curl \
+    libnss3 \
+    libatk-bridge2.0-0 \
+    libgtk-3-0 \
+    ibxss1 \
+    libx11-xcb1 \
+    libxcomposite1 \
+    libxdamage1 \
+    libxfixes3 \
+    libdrm2 \
+    libgbm1 \
+    libasound2 \
     #linux-headers-$(uname -r) \
     build-essential && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
